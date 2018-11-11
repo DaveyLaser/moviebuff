@@ -8,7 +8,7 @@ cache: {
   ]
 },
 script:
-  - npm --prefix frontend/ install create-react-app,
+  - npm --prefix frontend/ install create-react-app
   - npm --prefix frontend/ run test
   - npm --prefix frontend/ run build
 on:
