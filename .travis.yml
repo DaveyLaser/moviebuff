@@ -1,3 +1,4 @@
+dist: bionic beaver
 language: node_js
 node_js:
   - "stable"
@@ -5,9 +6,8 @@ cache:
   directories:
     - frontend/node_modules
 script:
-  - npm install -g create-react-app
-  - cd frontend
-  - npm test
-  - npm run build
+  - npm --prefix frontend/ install create-react-app
+  - npm --prefix frontend/ test
+  - npm --prefix frontend/ run build
 on:
   branch: master
