@@ -2,9 +2,6 @@ dist: bionic beaver
 language: node_js
 node_js:
   - "stable"
-cache:
-  directories:
-    - frontend/node_modules
 script:
   - cd frontend
   - npm run test
