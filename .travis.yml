@@ -3,7 +3,8 @@ language: node_js
 node_js:
   - "stable"
 script:
-  - npm --prefix frontend/ CI=true run test
+  - npm --prefix frontend/ install create-react-app,
+  - npm --prefix frontend/ run test
   - npm --prefix frontend/ run build
 on:
   branch: master
