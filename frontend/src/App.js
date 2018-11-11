@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import RatedMovieCollection from './component/RatedMovieCollection.js';
+import AddMovie from './component/AddMovie.js';
+import Header from './component/Header.js';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src="favicon.ico" alt=""></img>
-          <p>MovieBuff</p>
-          <img src="favicon.ico" alt=""></img>
-        </header>
+        <Header></Header>
+        <p>My Favorite Movies:</p>
+        <RatedMovieCollection></RatedMovieCollection>
+        <p>New Movie:</p>
+        <AddMovie></AddMovie>
       </div>
     );
   }

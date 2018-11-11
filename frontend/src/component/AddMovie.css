@@ -1,0 +1,8 @@
+.AddMovie {
+  display: flex;
+  flex-direction: row;
+}
+
+#Button {
+  color: whitesmoke;
+}
