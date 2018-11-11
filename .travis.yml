@@ -1,7 +1,12 @@
 dist: bionic beaver
 language: node_js
 node_js:
-  - "stable"
+  - stable
+cache: {
+  directories: [
+    frontend/node_modules
+  ]
+},
 script:
   - npm --prefix frontend/ install create-react-app,
   - npm --prefix frontend/ run test
