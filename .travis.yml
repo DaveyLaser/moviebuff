@@ -6,7 +6,8 @@ cache:
   directories:
     - frontend/node_modules
 script:
-  - npm --prefix frontend/ test
-  - npm --prefix frontend/ run build
+  - cd frontend
+  - npm run test
+  - npm run build
 on:
   branch: master
