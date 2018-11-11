@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import Input from '@material-ui/core/Input';
-import './MovieName.css';
+
+const inputStyle = {
+  color: 'whitesmoke',
+};
+
+const movieNameStyle = {
+  display: 'flex',
+};
 
 class MovieName extends Component {
   constructor(props) {
@@ -11,8 +18,13 @@ class MovieName extends Component {
   }
   render() {
     return (
-      <div className="MovieName">
-        <Input type="text" name="MovieName" defaultValue={this.state.name}></Input>
+      <div className="MovieName" style={movieNameStyle}>
+        <Input
+          type="text"
+          name="MovieName"
+          defaultValue={this.state.name}
+          style={inputStyle}
+        />
       </div>
     );
   }

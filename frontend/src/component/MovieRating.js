@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import StarRatingComponent from 'react-star-rating-component';
-import './MovieRating.css';
+
+const maxStars = 5;
 
 class MovieRating extends Component {  
   constructor(props) {
     super(props);
     this.state = {
       rating: this.props.rating,
+      starCount: maxStars,
     }
   }
 
@@ -16,9 +18,9 @@ class MovieRating extends Component {
  
   render() {
     return (
-      <StarRatingComponent 
-        name="rate1" 
-        starCount={5}
+      <StarRatingComponent
+        name="movieRating"
+        starCount={this.state.starCount}
         value={this.state.rating}
         onStarClick={this.onStarClick.bind(this)}
       />

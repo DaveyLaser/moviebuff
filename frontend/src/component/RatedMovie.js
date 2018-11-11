@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import MovieName from './MovieName.js';
 import MovieGenre from './MovieGenre.js';
 import MovieRating from './MovieRating.js';
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
 
-import './RatedMovie.css';
+const ratedMovieStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  color: 'whitesmoke',
+}
 
 class RatedMovie extends Component {
   constructor(props) {
@@ -18,19 +20,11 @@ class RatedMovie extends Component {
   }
   render() {
     return (
-      <div className="RatedMovie">
-        <MovieName
-          name={this.state.name}
-        />
-        <MovieGenre
-          genre={this.state.genre}
-        />
-        <MovieRating
-          rating={this.state.rating}
-        />
-        <Button>
-          <DeleteIcon></DeleteIcon>
-        </Button>
+      <div className="RatedMovie" style={ratedMovieStyle}>
+        <MovieName name={this.state.name} />
+        <MovieGenre genre={this.state.genre} />
+        <MovieRating rating={this.state.rating} />
+        {this.props.children}
       </div>
     );
   }
