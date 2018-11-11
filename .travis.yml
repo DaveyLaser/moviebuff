@@ -6,7 +6,6 @@ cache:
   directories:
     - frontend/node_modules
 script:
-  - npm --prefix frontend/ install create-react-app
   - npm --prefix frontend/ test
   - npm --prefix frontend/ run build
 on:
