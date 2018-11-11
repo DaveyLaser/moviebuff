@@ -3,8 +3,7 @@ language: node_js
 node_js:
   - "stable"
 script:
-  - cd frontend
-  - npm run test
-  - npm run build
+  - npm --prefix frontend/ CI=true run test
+  - npm --prefix frontend/ run build
 on:
   branch: master
