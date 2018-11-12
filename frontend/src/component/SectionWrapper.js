@@ -9,9 +9,9 @@ const sectionWrapperStyle = {
 }
 
 const headerStyle = {
-  // TODO: Positioning the <p> element text to the left, this is hacky
-  // Material FormControl might help the layout issues
-  paddingRight: '19vw',
+  display: 'flex',
+  minWidth: '100%',
+  fontSize: '30px',
 };
 
 class SectionWrapper extends React.Component {
@@ -26,6 +26,7 @@ class SectionWrapper extends React.Component {
       style: wrapperStyle,
     }
   }
+
   render() {
     return (
       <div style={this.state.style}>

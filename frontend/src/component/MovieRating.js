@@ -12,8 +12,13 @@ class MovieRating extends Component {
     }
   }
 
-  onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
+  onStarClick(nextValue) {
+    this.setState({
+      rating: nextValue
+    });
+    if (this.props.onChange) {
+      this.props.onChange(nextValue);
+    }
   }
  
   render() {
