@@ -12,3 +12,7 @@
 *env.production.local
 *npm-debug.log*
 .vscode
+*.classpath
+*.project
+*.settings/
+target/
