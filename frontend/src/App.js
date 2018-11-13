@@ -27,8 +27,6 @@ const footerStyle = {
 class App extends Component {
   constructor(props) {
     super(props);
-    // this.onDelete = this.onDelete.bind(this);
-    // this.onAdd = this.onAdd.bind(this);
     this.state = {
       favoriteMovies: [...movies],
     }

@@ -5,11 +5,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 class DeleteButton extends React.Component {
   render() {
     return (
-      // <div style={paddedStyle}>
-        <Button onClick={this.props.onDelete(this.props.movieKey)}>
-          <DeleteIcon></DeleteIcon>
-        </Button>
-      // </div>
+      <Button onClick={this.props.onDelete(this.props.movieKey)}>
+        <DeleteIcon></DeleteIcon>
+      </Button>
     );
   }
 }
