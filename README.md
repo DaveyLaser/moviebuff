@@ -3,7 +3,9 @@
 
 # moviebuff
 
-Catalog and rate the movies you've seen
+List your favorite movies!
+
+See [Issues](https://github.com/DaveyLaser/moviebuff/issues) for upcoming bug fixes and features.
 
 ## Run Docker Image (path of least resistance)
 
