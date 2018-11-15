@@ -5,7 +5,7 @@
 
 Catalog and rate the movies you've seen
 
-## Run Docker image (path of least resistance)
+## Run Docker Image (path of least resistance)
 
 1. Install Docker on Mac (skip this step if you already have docker installed):
     * [Download Docker](https://download.docker.com/mac/stable/Docker.dmg)
@@ -25,7 +25,7 @@ Catalog and rate the movies you've seen
 
 3. View in your browser: [localhost:8080](http://localhost:8080)
 
-## Build from source (not too bad, but more involved than Docker)
+## Build From Source (not too bad, but more involved than Docker)
 
 Install dependencies for Mac:
 
