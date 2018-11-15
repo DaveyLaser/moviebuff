@@ -1,5 +1,8 @@
-dist: bionic beaver
+dist: xenial
 language: node_js
+language: java
+jdk:
+  - openjdk10
 node_js:
   - stable
 cache: {
@@ -8,8 +11,6 @@ cache: {
   ]
 },
 script:
-  - npm --prefix frontend/ install create-react-app
-  - npm --prefix frontend/ run test
-  - npm --prefix frontend/ run build
+  - mvn install
 on:
   branch: master
