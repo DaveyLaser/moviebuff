@@ -3,9 +3,11 @@
 
 # moviebuff
 
-Catalog and rate the movies you've seen
+List your favorite movies!
 
-## Run locally using Docker (path of least resistance)
+See [Issues](https://github.com/DaveyLaser/moviebuff/issues) for upcoming bug fixes and features.
+
+## Run Docker Image (path of least resistance)
 
 1. Install Docker on Mac (skip this step if you already have docker installed):
     * [Download Docker](https://download.docker.com/mac/stable/Docker.dmg)
@@ -25,7 +27,7 @@ Catalog and rate the movies you've seen
 
 3. View in your browser: [localhost:8080](http://localhost:8080)
 
-## Clone repo, build and run (not too bad, but more involved than Docker)
+## Build From Source (not too bad, but more involved than Docker)
 
 Install dependencies for Mac:
 
