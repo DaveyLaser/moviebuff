@@ -65,7 +65,7 @@ class AddMovie extends React.Component {
     });
   }
 
-  onAdd = function() {
+  onAdd = () => {
     let state = {...this.state};
     this.props.onAdd(state);
     this.setState({
@@ -94,9 +94,7 @@ class AddMovie extends React.Component {
               rating={this.state.rating}
               onChange={this.onRatingChange}
             />
-            {/* <MovieInfoRow onAdd={this.props.onAdd}> */}
             <AddButton onAdd={this.onAdd}/>
-            {/* </MovieInfoRow> */}
           </div>
         </div>
         <div />

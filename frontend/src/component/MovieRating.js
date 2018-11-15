@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import StarRatings from 'react-star-ratings';
 
 const maxStars = 5;
 
@@ -12,22 +12,26 @@ class MovieRating extends Component {
     }
   }
 
-  onStarClick(nextValue) {
+  onStarClick = newRating => {
     this.setState({
-      rating: nextValue
+      rating: newRating
     });
     if (this.props.onChange) {
-      this.props.onChange(nextValue);
+      this.props.onChange(newRating);
     }
   }
  
   render() {
     return (
-      <StarRatingComponent
-        name="movieRating"
-        starCount={this.state.starCount}
-        value={this.state.rating}
-        onStarClick={this.onStarClick.bind(this)}
+      <StarRatings
+        rating={this.state.rating}
+        starRatedColor="yellow"
+        starDimension="20px"
+        starSpacing="2px"
+        starHoverColor="#aa0000"
+        changeRating={this.onStarClick}
+        numberOfStars={5}
+        name='rating'
       />
     );
   }

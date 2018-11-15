@@ -13,6 +13,8 @@
 *npm-debug.log*
 .vscode
 *.classpath
+*.factorypath
 *.project
 *.settings/
 target/
+bin/

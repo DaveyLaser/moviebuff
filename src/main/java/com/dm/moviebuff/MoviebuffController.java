@@ -1,26 +1,38 @@
-package main.java.com.dm.moviebuff;
+package com.dm.moviebuff;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
+import java.util.List;
 
 @RestController
 public class MoviebuffController {
-    @GetMapping("/api/movie-genres")
-    public String[] hello() {
-      String[] genres = {
-        "Suspense",
-        "Comedy",
-        "Romance",
-        "Fantasy",
-        "Sci-Fi", 
-        "Action",
-        "Thriller",
-        "Horror",
-        "Documentary"
-      };
+    private MoviebuffRepository repository;
 
-      return genres;
+    MoviebuffController() {
+      this.repository = new MoviebuffRepository();
+    }
+
+    @GetMapping("/api/movie-genres")
+    public String[] movieGenres() {
+      return this.repository.getGenres();
+    }
+
+    @GetMapping("/api/movies")
+    public List<Movie> movies() {
+      return this.repository.getMovies();
+    }
+
+    @PostMapping("/api/movies")
+    Movie newEmployee(@RequestBody Movie newEmployee) {
+      return this.repository.addMovie(newEmployee);
+    }
+
+    @DeleteMapping("/api/movies/{name}")
+    void deleteMovie(@PathVariable String name) {
+      this.repository.deleteMovie(name);
     }
 }
