@@ -25,7 +25,7 @@ Catalog and rate the movies you've seen
 
 3. View in your browser: [localhost:8080](http://localhost:8080)
 
-## Clone repo, build and run (not too bad, but more involved than Docker)
+## Build from source (not too bad, but more involved than Docker)
 
 Install dependencies for Mac:
 
