@@ -77,8 +77,8 @@ class App extends Component {
       });
     }
 
-    // ^^ see above in onDeleteMovie
-    fetch('/api/movies', {
+  // ^^ see above in onDeleteMovie
+  fetch('/api/movies', {
       method: 'post',
       body: JSON.stringify(movie),
       headers: {
@@ -86,7 +86,7 @@ class App extends Component {
       }
   })
     .then(response => response.json())
-    .then(data => console.log("Added: " + data) )
+    .then(data => console.log("Added: " + JSON.stringify(data)))
     .catch(e => console.log("I was lazy here: " + e));
   }
 

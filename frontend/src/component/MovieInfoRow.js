@@ -19,12 +19,47 @@ class MovieInfoRow extends Component {
     }
   }
 
+  onNameChange = name => {
+    let oldName = this.state.name;
+    this.setState({
+      name: name,
+    }, () => this.updateMovie(oldName));
+  }
+
+  onGenreChange = genre => {
+    this.setState({
+      genre: genre,
+    }, () => this.updateMovie());
+  }
+
+  onRatingChange = rating => {
+    this.setState({
+      rating: rating,
+    }, () => this.updateMovie());
+  }
+
+  updateMovie = (oldMovieName) => {
+    if (!oldMovieName) {
+      oldMovieName = this.state.name;
+    } 
+    fetch(`/api/movies/${encodeURIComponent(oldMovieName)}`, {
+      method: 'put',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => console.log("Updated: " + JSON.stringify(data)))
+      .catch(e => console.log("I was lazy here: " + e));
+  }
+
   render() {
     return (
       <div className="MovieInfoRow" style={movieInfoRowStyle}>
-        <MovieName name={this.state.name} readOnly={true} />
-        <MovieGenre genre={this.state.genre} readOnly={false} />
-        <MovieRating rating={this.state.rating} readOnly={false} />
+        <MovieName name={this.state.name} onChange={this.onNameChange} />
+        <MovieGenre genre={this.state.genre} onChange={this.onGenreChange} />
+        <MovieRating rating={this.state.rating} onChange={this.onRatingChange}/>
         {this.props.children}
       </div>
     );

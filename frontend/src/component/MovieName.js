@@ -9,7 +9,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "120px",
+    width: "200px",
     textAlign: "left",
   },
   input: {
@@ -32,7 +32,9 @@ class MovieName extends Component {
       [name]: event.target.value,
       [label]: ""
     });
-    this.props.onChange(event.target.value)
+    if (this.props.onChange) {
+      this.props.onChange(event.target.value)
+    }
   };
 
   render() {

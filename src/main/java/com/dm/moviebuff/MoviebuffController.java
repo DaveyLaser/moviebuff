@@ -3,6 +3,7 @@ package com.dm.moviebuff;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +28,17 @@ public class MoviebuffController {
     }
 
     @PostMapping("/api/movies")
-    Movie newEmployee(@RequestBody Movie newEmployee) {
+    public Movie newEmployee(@RequestBody Movie newEmployee) {
       return this.repository.addMovie(newEmployee);
     }
 
     @DeleteMapping("/api/movies/{name}")
-    void deleteMovie(@PathVariable String name) {
+    public void deleteMovie(@PathVariable String name) {
       this.repository.deleteMovie(name);
+    }
+
+    @PutMapping("/api/movies/{name}")
+    public Movie updateMovie(@PathVariable String name, @RequestBody Movie newData) {
+      return this.repository.updateMovie(name, newData);
     }
 }

@@ -40,6 +40,8 @@ class MoviebuffRepository {
 
   public Movie addMovie(Movie movie) {
     if (this.movieExists(movie)) {
+      // This needs to return a correct response value
+      // Or a flag for success/fail
       return null;
     } else {
       movies.add(movie);
@@ -53,6 +55,21 @@ class MoviebuffRepository {
         this.movies.remove(movie);
       }
     }
+  }
+
+  public Movie updateMovie(String movieName, Movie newData) {
+    for (Movie movie : this.movies) {
+      if (movie.getName().equals(movieName)) {
+        movie.setName(newData.getName());
+        movie.setGenre(newData.getGenre());
+        movie.setRating(newData.getRating());
+        return movie;
+      }
+    }
+    System.out.println("RETURNING NULL");
+    // This needs to return a correct response value
+    // Or a flag for success/fail
+    return null;
   }
 
   private boolean movieExists(Movie movieToLookFor) {
