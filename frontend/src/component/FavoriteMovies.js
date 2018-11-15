@@ -6,7 +6,10 @@ import DeleteButton from './DeleteButton';
 class FavoriteMovies extends Component {
   render() {
     return (
-      <SectionWrapper title="My favorite movies:" backgroundColor="darkgray">
+      <SectionWrapper
+        title="My favorite movies:"
+        backgroundColor="darkgray"
+      >
         <div className="RatedMovieCollection">
           {this.props.movies.map(movie => (
             <MovieInfoRow
@@ -17,7 +20,7 @@ class FavoriteMovies extends Component {
             >
               <DeleteButton
                 onDelete={this.props.onDelete}
-                movieKey={movie.name}/>
+                movie={movie}/>
             </MovieInfoRow>
           ))}
         </div>

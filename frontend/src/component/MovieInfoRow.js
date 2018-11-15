@@ -22,9 +22,9 @@ class MovieInfoRow extends Component {
   render() {
     return (
       <div className="MovieInfoRow" style={movieInfoRowStyle}>
-        <MovieName name={this.state.name} readOnly={true}/>
+        <MovieName name={this.state.name} readOnly={true} />
         <MovieGenre genre={this.state.genre} readOnly={false} />
-        <MovieRating rating={this.state.rating} readOnly={false}/>
+        <MovieRating rating={this.state.rating} readOnly={false} />
         {this.props.children}
       </div>
     );

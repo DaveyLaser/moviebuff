@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import genres from '../service/genres';
 
 const styles = theme => ({
   movieGenre: {
@@ -15,7 +14,7 @@ const styles = theme => ({
     textAlign: "left",
   },
   input: {
-    color: "whitesmoke"
+    color: "white"
   }
 });
 
@@ -25,7 +24,14 @@ class MovieGenre extends Component {
     this.state = {
       genre: this.props.genre,
       label: "Genre",
+      genres: [],
     }
+  }
+
+  componentDidMount() {
+    fetch("/api/movie-genres")
+      .then(response => response.json())
+      .then(genres => this.setState({genres}))
   }
 
   onGenreChange = event => {
@@ -55,7 +61,7 @@ class MovieGenre extends Component {
           onChange={this.onGenreChange}
         >
         {
-          genres.map(genre => (
+          this.state.genres.map(genre => (
             <MenuItem key={genre} value={genre}>{genre}</MenuItem>
           ))
         }

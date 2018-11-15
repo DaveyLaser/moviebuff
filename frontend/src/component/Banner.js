@@ -5,7 +5,7 @@ const bannerStyle = {
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  backgroundColor: '#f9bcd0',
+  backgroundColor: '#aa0000',
   minWidth: '100vw',
 };
 
