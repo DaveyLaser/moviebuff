@@ -22,7 +22,7 @@ See [Issues](https://github.com/DaveyLaser/moviebuff/issues) for upcoming bug fi
     docker version
 
     # Run the image, pointing it's server to your localhost:8080
-    docker run -p 8080:8080 davidpmiller/moviebuff:0.0.1-SNAPSHOT
+    docker run -p 8080:8080 davidpmiller/moviebuff:0.0.2
     ```
 
 3. View in your browser: [localhost:8080](http://localhost:8080)
