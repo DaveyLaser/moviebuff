@@ -1,15 +1,5 @@
 dist: xenial
-language: node_js
 language: java
-jdk:
-  - openjdk10
-node_js:
-  - stable
-cache: {
-  directories: [
-    frontend/node_modules
-  ]
-},
 script:
   - mvn install
 on:
