@@ -5,7 +5,7 @@
 
 Catalog and rate the movies you've seen
 
-## Run locally using Docker (path of least resistance)
+## Run Docker image (path of least resistance)
 
 1. Install Docker on Mac (skip this step if you already have docker installed):
     * [Download Docker](https://download.docker.com/mac/stable/Docker.dmg)
