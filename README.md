@@ -71,3 +71,5 @@ Install dependencies for Mac:
     cd moviebuff
     mvn spring-boot:run
     ```
+   
+7. View in your browser: [localhost:8080](http://localhost:8080)
