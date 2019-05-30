@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashleygwilliams/my_package.git"
+    "url": "https://github.com/davepmiller/moviebuff"
   },
   "dependencies": {
     "@material-ui/core": "^3.5.1",
