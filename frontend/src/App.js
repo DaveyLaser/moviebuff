@@ -23,6 +23,10 @@ const footerStyle = {
   color: 'white',
 };
 
+const httpHeader = {
+  'Content-Type': 'application/json'
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +39,7 @@ class App extends Component {
     fetch("/api/movies")
       .then(response => response.json())
       .then(movies => this.setState({favoriteMovies: movies}))
-      .catch(e => console.log("I was lazy here: " + e));
+      .catch(e => console.log(e));
   }
 
   onDeleteMovie = movieToDelete => event => {
@@ -43,23 +47,12 @@ class App extends Component {
       movie => movie.name !== movieToDelete.name
     );
 
-    // Setting state locally AND posting to backend...
-    // This should all move to redux
-    this.setState({
-      favoriteMovies: newState,
-    });
-
-    // ^^ see above
+    this.setState({favoriteMovies: newState});
     fetch('/api/movies/' + movieToDelete.name, {
         method: 'delete',
         body: movieToDelete.name,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-    })
-      .then(response => response.json())
-      .then(data => console.log(data) )
-      .catch(e => console.log("I was lazy here: " + e));
+        headers: httpHeader
+    }).catch(e => console.log(e));
   }
 
   onAddMovie = movie => {
@@ -72,22 +65,16 @@ class App extends Component {
     } else {
       let newState = [...this.state.favoriteMovies];
       newState.push(movie);
-      this.setState({
-        favoriteMovies: newState,
-      });
+      this.setState({favoriteMovies: newState});
     }
 
-  // ^^ see above in onDeleteMovie
-  fetch('/api/movies', {
-      method: 'post',
-      body: JSON.stringify(movie),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-  })
-    .then(response => response.json())
-    .then(data => console.log("Added: " + JSON.stringify(data)))
-    .catch(e => console.log("I was lazy here: " + e));
+    fetch('/api/movies', {
+        method: 'post',
+        body: JSON.stringify(movie),
+        headers: httpHeader
+    }).then(response => response.json())
+      .then(data => console.log("Added: " + JSON.stringify(data)))
+      .catch(e => console.log(e));
   }
 
   render() {
