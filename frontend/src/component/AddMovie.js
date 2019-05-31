@@ -47,6 +47,7 @@ class AddMovie extends React.Component {
     this.state = {...defaultState};
   }
 
+
   onNameChange = name => {
     this.setState({
       name: name,
@@ -68,9 +69,7 @@ class AddMovie extends React.Component {
   onAdd = () => {
     let state = {...this.state};
     this.props.onAdd(state);
-    this.setState({
-      state: defaultState,
-    })
+    this.setState(defaultState);
   }
 
   render() {

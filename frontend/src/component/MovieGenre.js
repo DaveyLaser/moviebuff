@@ -34,6 +34,12 @@ class MovieGenre extends Component {
       .then(genres => this.setState({genres}))
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.genre === "") {
+      this.setState({genre: ""});
+    }
+  }
+
   onGenreChange = event => {
     this.setState({
       [event.target.name]: event.target.value,

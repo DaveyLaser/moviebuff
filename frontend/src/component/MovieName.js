@@ -27,6 +27,12 @@ class MovieName extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.name === "") {
+      this.setState({name: ""});
+    }
+  }
+
   onNameChange = (name, label) => event => {
     this.setState({ 
       [name]: event.target.value,
@@ -46,6 +52,7 @@ class MovieName extends Component {
           type="text"
           name="value"
           defaultValue={this.state.name}
+          value={this.state.name}
           className={classes.movieName}
           InputProps={{
             className: classes.input,
