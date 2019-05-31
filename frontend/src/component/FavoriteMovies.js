@@ -20,7 +20,8 @@ class FavoriteMovies extends Component {
             >
               <DeleteButton
                 onDelete={this.props.onDelete}
-                movie={movie}/>
+                movie={movie}
+              />
             </MovieInfoRow>
           ))}
         </div>
