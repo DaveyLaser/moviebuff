@@ -1,6 +1,7 @@
-dist: xenial
-language: java
+language: node_js
+node_js:
+  - "stable"
 script:
-  - mvn install
+  - CI=true npm test
 on:
   branch: master
