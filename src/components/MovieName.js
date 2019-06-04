@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
 
 const styles = theme => ({
   movieName: {
@@ -15,11 +15,11 @@ const styles = theme => ({
   input: {
     color: "whitesmoke"
   }
-});
+})
 
 class MovieName extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       name: this.props.name,
       label: "Name",
@@ -29,7 +29,7 @@ class MovieName extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.name === "") {
-      this.setState({name: ""});
+      this.setState({name: ""})
     }
   }
 
@@ -37,14 +37,14 @@ class MovieName extends Component {
     this.setState({ 
       [name]: event.target.value,
       [label]: ""
-    });
+    })
     if (this.props.onChange) {
       this.props.onChange(event.target.value)
     }
-  };
+  }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <div className="MovieName">
         <TextField
@@ -61,8 +61,8 @@ class MovieName extends Component {
           onChange={this.onNameChange("name", "label")}
         />
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(MovieName);
+export default withStyles(styles)(MovieName)

@@ -1,8 +1,8 @@
-import React from 'react';
-import AddButton from './AddButton';
-import MovieName from './MovieName';
-import MovieGenre from './MovieGenre';
-import MovieRating from './MovieRating';
+import React from 'react'
+import AddButton from './AddButton'
+import MovieName from './MovieName'
+import MovieGenre from './MovieGenre'
+import MovieRating from './MovieRating'
 
 const addMovieStyle = {
   display: 'flex',
@@ -102,4 +102,4 @@ class AddMovie extends React.Component {
   }
 }
 
-export default AddMovie;
+export default AddMovie

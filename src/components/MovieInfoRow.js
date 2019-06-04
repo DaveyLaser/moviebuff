@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import MovieName from './MovieName';
-import MovieGenre from './MovieGenre';
-import MovieRating from './MovieRating';
-import ENDPOINT from './../endpoints';
+import React, { Component } from 'react'
+import MovieName from './MovieName'
+import MovieGenre from './MovieGenre'
+import MovieRating from './MovieRating'
+import ENDPOINT from '../common/endpoints'
 
 const movieInfoRowStyle = {
   display: 'flex',
   flexDirection: 'row',
   color: 'whitesmoke',
-};
+}
 
 class MovieInfoRow extends Component {
   constructor(props) {
@@ -63,8 +63,8 @@ class MovieInfoRow extends Component {
         <MovieRating rating={this.state.rating} onChange={this.onRatingChange}/>
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
-export default MovieInfoRow;
+export default MovieInfoRow

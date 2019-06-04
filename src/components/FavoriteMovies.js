@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import MovieInfoRow from './MovieInfoRow';
-import SectionWrapper from './SectionWrapper';
-import DeleteButton from './DeleteButton';
+import React, { Component } from 'react'
+import MovieInfoRow from './MovieInfoRow'
+import SectionWrapper from './SectionWrapper'
+import DeleteButton from './DeleteButton'
 
 class FavoriteMovies extends Component {
   render() {
@@ -30,4 +30,4 @@ class FavoriteMovies extends Component {
   }
 }
 
-export default FavoriteMovies;
+export default FavoriteMovies

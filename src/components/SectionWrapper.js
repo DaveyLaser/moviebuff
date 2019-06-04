@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const sectionWrapperStyle = {
   display: 'flex',
@@ -12,14 +12,14 @@ const headerStyle = {
   display: 'flex',
   minWidth: '100%',
   fontSize: '30px',
-};
+}
 
 class SectionWrapper extends React.Component {
   constructor(props) {
-    super(props);
-    let wrapperStyle = {...sectionWrapperStyle};
+    super(props)
+    let wrapperStyle = {...sectionWrapperStyle}
     if(props.backgroundColor) {
-      wrapperStyle.backgroundColor = props.backgroundColor;
+      wrapperStyle.backgroundColor = props.backgroundColor
     }
     this.state = {
       title: this.props.title,
@@ -35,8 +35,8 @@ class SectionWrapper extends React.Component {
         </div>
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
-export default SectionWrapper;
+export default SectionWrapper

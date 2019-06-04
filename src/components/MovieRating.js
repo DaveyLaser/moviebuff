@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import StarRatings from 'react-star-ratings';
+import React, { Component } from 'react'
+import StarRatings from 'react-star-ratings'
 
-const maxStars = 5;
+const maxStars = 5
 
 class MovieRating extends Component {  
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       rating: this.props.rating,
       starCount: maxStars,
@@ -15,9 +15,9 @@ class MovieRating extends Component {
   onStarClick = newRating => {
     this.setState({
       rating: newRating
-    });
+    })
     if (this.props.onChange) {
-      this.props.onChange(newRating);
+      this.props.onChange(newRating)
     }
   }
  
@@ -33,8 +33,8 @@ class MovieRating extends Component {
         numberOfStars={5}
         name='rating'
       />
-    );
+    )
   }
 }
 
-export default MovieRating;
+export default MovieRating

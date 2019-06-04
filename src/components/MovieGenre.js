@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import ENDPOINT from '../endpoints';
+import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+import ENDPOINT from '../common/endpoints'
 
 const styles = theme => ({
   movieGenre: {
@@ -17,11 +17,11 @@ const styles = theme => ({
   input: {
     color: "white"
   }
-});
+})
 
 class MovieGenre extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       genre: this.props.genre,
       label: "Genre",
@@ -49,7 +49,7 @@ class MovieGenre extends Component {
     if (this.props.onChange) {
       this.props.onChange(event.target.value);
     }
-  };
+  }
 
   render() {
     const { classes } = this.props;
@@ -78,4 +78,4 @@ class MovieGenre extends Component {
   }
 }
 
-export default withStyles(styles)(MovieGenre);
+export default withStyles(styles)(MovieGenre)

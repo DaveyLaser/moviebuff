@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const bannerStyle = {
   display: 'flex',
@@ -7,9 +7,9 @@ const bannerStyle = {
   justifyContent: 'space-evenly',
   backgroundColor: '#aa0000',
   minWidth: '100vw',
-};
+}
 
-const iconCount = 3;
+const iconCount = 3
 
 class Banner extends React.Component {
   render() {
@@ -19,8 +19,8 @@ class Banner extends React.Component {
           <img src="favicon.ico" alt="n/a" key={i}></img>
         )}
       </div>
-    );
+    )
   }
 }
 
-export default Banner;
+export default Banner

@@ -4,12 +4,12 @@ import AddIcon from '@material-ui/icons/Add';
 
 class AddButton extends React.Component {
   constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
+    super(props)
+    this.onClick = this.onClick.bind(this)
   }
 
   onClick = function() {
-    this.props.onAdd();
+    this.props.onAdd()
   }
 
   render() {
@@ -21,4 +21,4 @@ class AddButton extends React.Component {
   }
 }
 
-export default AddButton;
+export default AddButton
