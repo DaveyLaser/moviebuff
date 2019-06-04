@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import ENDPOINT from '../endpoints';
 
 const styles = theme => ({
   movieGenre: {
@@ -29,7 +30,7 @@ class MovieGenre extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/movie-genres")
+    fetch(ENDPOINT + "/api/movie-genres")
       .then(response => response.json())
       .then(genres => this.setState({genres}))
   }

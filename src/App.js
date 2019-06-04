@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FavoriteMovies from './component/FavoriteMovies';
 import AddMovie from './component/AddMovie';
 import Banner from './component/Banner';
+import ENDPOINT from './endpoints';
 
 const appStyle = {
   textAlign: 'center',
@@ -36,7 +37,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/movies")
+    fetch(ENDPOINT + '/api/movies')
       .then(response => response.json())
       .then(movies => this.setState({favoriteMovies: movies}))
       .catch(e => console.log(e));
@@ -48,7 +49,7 @@ class App extends Component {
     );
 
     this.setState({favoriteMovies: newState});
-    fetch('/api/movies/' + movieToDelete.name, {
+    fetch(ENDPOINT + '/api/movies/' + movieToDelete.name, {
         method: 'delete',
         body: movieToDelete.name,
         headers: httpHeader
@@ -66,7 +67,7 @@ class App extends Component {
       let newState = [...this.state.favoriteMovies];
       newState.push(movie);
       this.setState({favoriteMovies: newState});
-      fetch('/api/movies', {
+      fetch(ENDPOINT + '/api/movies', {
         method: 'post',
         body: JSON.stringify(movie),
         headers: httpHeader
