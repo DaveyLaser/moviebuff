@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MovieName from './MovieName';
 import MovieGenre from './MovieGenre';
 import MovieRating from './MovieRating';
+import ENDPOINT from './../endpoints';
 
 const movieInfoRowStyle = {
   display: 'flex',
@@ -42,7 +43,7 @@ class MovieInfoRow extends Component {
     if (!oldMovieName) {
       oldMovieName = this.state.name;
     } 
-    fetch(`/api/movies/${encodeURIComponent(oldMovieName)}`, {
+    fetch(ENDPOINT + `/api/movies/${encodeURIComponent(oldMovieName)}`, {
       method: 'put',
       body: JSON.stringify(this.state),
       headers: {
