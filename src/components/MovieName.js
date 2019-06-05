@@ -51,7 +51,6 @@ class MovieName extends Component {
           label={this.state.name ? "" : this.state.label}
           type="text"
           name="value"
-          defaultValue={this.state.name}
           value={this.state.name}
           className={classes.movieName}
           InputProps={{

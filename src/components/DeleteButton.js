@@ -1,15 +1,34 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { deleteMovieDispatch } from '../state/actions';
 
-class DeleteButton extends React.Component {
-  render() {
-    return (
-      <Button onClick={this.props.onDelete(this.props.movie)}>
-        <DeleteIcon></DeleteIcon>
-      </Button>
-    )
-  }
+let DeleteButton = ({movie, deleteMovie}) => {
+  console.log(deleteMovie)
+  return (
+    <Button onClick={deleteMovie}>
+      <DeleteIcon></DeleteIcon>
+    </Button>
+  )
 }
+
+DeleteButton.propTypes = {
+  movie: PropTypes.object.isRequired,
+  deleteMovie: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+  movie: state.movie,
+})
+
+const mapDispatchToProps = (dispatch, props) => ({
+  deleteMovie: () => {
+    dispatch(deleteMovieDispatch(props.movie))
+  }
+})
+
+DeleteButton = connect(mapStateToProps, mapDispatchToProps)(DeleteButton)
 
 export default DeleteButton

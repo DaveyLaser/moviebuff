@@ -45,7 +45,8 @@ class MovieGenre extends Component {
     this.setState({
       [event.target.name]: event.target.value,
       label: ""
-    });
+    })
+    
     if (this.props.onChange) {
       this.props.onChange(event.target.value);
     }
@@ -74,7 +75,7 @@ class MovieGenre extends Component {
         }
         </TextField>
       </div>
-    );
+    )
   }
 }
 

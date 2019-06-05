@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import FavoriteMovies from '../components/FavoriteMovies'
-import AddMovie from '../components/AddMovie'
 import Banner from '../components/Banner'
-import ENDPOINT from '../common/endpoints'
+import Footer from '../components/Footer'
+import { getMoviesDispatch } from '../state/actions'
 
 const appStyle = {
   textAlign: 'center',
@@ -15,85 +17,34 @@ const appStyle = {
   alignItems: 'center',
 }
 
-const footerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-  bottom: 0,
-  alignItems: 'center',
-  color: 'white',
+let App = ({init, loading, getMovies}) => {
+  if (init) {
+    getMovies()
+  }
+
+  let favoriteMovies = loading ? <h2>Loading...</h2> : <FavoriteMovies/>;
+  return (
+    <div className="App" style={appStyle}>
+      <header>
+        <Banner/>
+      </header>
+      {favoriteMovies}
+      <Footer/>
+    </div>
+  )
 }
 
-const httpHeader = {
-  'Content-Type': 'application/json'
+App.propTypes = {
+  init: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  getMovies: PropTypes.func.isRequired
 }
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      favoriteMovies: [],
-    }
-  }
+const mapStateToProps = state => ({
+  init: state.init,
+  loading: state.loading,
+})
 
-  componentDidMount() {
-    fetch(ENDPOINT + '/api/movies')
-      .then(response => response.json())
-      .then(movies => this.setState({favoriteMovies: movies}))
-      .catch(e => console.log(e))
-  }
+const mapDispatchToProps = {getMovies: getMoviesDispatch}
 
-  onDeleteMovie = movieToDelete => event => {
-    let newState = this.state.favoriteMovies.filter(
-      movie => movie.name !== movieToDelete.name
-    )
-
-    this.setState({favoriteMovies: newState})
-    fetch(ENDPOINT + '/api/movies/' + movieToDelete.name, {
-        method: 'delete',
-        body: movieToDelete.name,
-        headers: httpHeader
-    }).catch(e => console.log(e))
-  }
-
-  onAddMovie = movie => {
-    if (this.state.favoriteMovies.some(
-      existing => movie.name === existing.name
-    )) {
-      console.log("DEBUG: You cannot add the same movie twice!")
-    } else if (movie.name === "" || movie.genre === "") {
-      console.log("ERROR: Name and Genre fields must be populated")
-    } else {
-      let newState = [...this.state.favoriteMovies]
-      newState.push(movie)
-      this.setState({favoriteMovies: newState})
-      fetch(ENDPOINT + '/api/movies', {
-        method: 'post',
-        body: JSON.stringify(movie),
-        headers: httpHeader
-      }).then(response => response.json())
-        .then(data => console.log("Added: " + JSON.stringify(data)))
-        .catch(e => console.log(e))
-    }
-  }
-
-  render() {
-    return (
-      <div className="App" style={appStyle}>
-        <header>
-          <Banner />
-        </header>
-        <FavoriteMovies
-          onDelete={this.onDeleteMovie}
-          movies={this.state.favoriteMovies}
-        />
-        <footer style={footerStyle}>
-          <AddMovie onAdd={this.onAddMovie} />
-          <Banner />
-        </footer>
-      </div>
-    )
-  }
-}
-
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App)

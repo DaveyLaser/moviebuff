@@ -12,24 +12,24 @@ const addMovieStyle = {
   justifyContent: 'space-evenly',
   backgroundColor: 'gray',
   paddingBottom: '1vh',
-};
+}
 
 const centerStyle = {
   display: 'flex',
   flexDirection: 'column',
-};
+}
 
 const headerStyle = {
   display: 'flex',
   fontSize: '30px',
   color: 'whitesmoke',
-};
+}
 
 const rowStyle = {
   display: 'flex',
   flexDirection: 'row',
   color: 'whitesmoke',
-};
+}
 
 const defaultState = {
   name: "",
@@ -39,31 +39,31 @@ const defaultState = {
 
 class AddMovie extends React.Component {
   constructor(props) {
-    super(props);
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onGenreChange = this.onGenreChange.bind(this);
-    this.onRatingChange = this.onRatingChange.bind(this);
-    this.onAdd = this.onAdd.bind(this);
-    this.state = {...defaultState};
+    super(props)
+    this.onNameChange = this.onNameChange.bind(this)
+    this.onGenreChange = this.onGenreChange.bind(this)
+    this.onRatingChange = this.onRatingChange.bind(this)
+    this.onAdd = this.onAdd.bind(this)
+    this.state = {...defaultState}
   }
 
 
   onNameChange = name => {
     this.setState({
       name: name,
-    });
+    })
   }
 
   onGenreChange = genre => {
     this.setState({
       genre: genre,
-    });
+    })
   }
 
   onRatingChange = rating => {
     this.setState({
       rating: rating,
-    });
+    })
   }
 
   onAdd = () => {

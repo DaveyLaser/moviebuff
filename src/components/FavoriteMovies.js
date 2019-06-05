@@ -1,33 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import MovieInfoRow from './MovieInfoRow'
 import SectionWrapper from './SectionWrapper'
 import DeleteButton from './DeleteButton'
 
-class FavoriteMovies extends Component {
-  render() {
-    return (
-      <SectionWrapper
-        title="My favorite movies:"
-        backgroundColor="darkgray"
-      >
-        <div className="RatedMovieCollection">
-          {this.props.movies.map(movie => (
-            <MovieInfoRow
-              key={movie.name}
-              name={movie.name}
-              genre={movie.genre}
-              rating={movie.rating}
-            >
-              <DeleteButton
-                onDelete={this.props.onDelete}
-                movie={movie}
-              />
-            </MovieInfoRow>
-          ))}
-        </div>
-      </SectionWrapper>
-    )
-  }
+let FavoriteMovies = ({movies}) => {
+  let ratedMovieCollection = (movies && movies.length > 0) ?
+  <div className="RatedMovieCollection">
+    {movies.map((movie, idx) => (
+      <MovieInfoRow key={idx} movie={movie}>
+        <DeleteButton movie={movie}/>
+      </MovieInfoRow>
+    ))}
+  </div>
+  : ''
+
+  return (
+    <SectionWrapper
+      title="My favorite movies:"
+      backgroundColor="darkgray"
+    >
+      {ratedMovieCollection}
+    </SectionWrapper>
+  )
 }
 
-export default FavoriteMovies
+FavoriteMovies.propTypes = {
+  movies: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+  movies: state.movies
+})
+
+export default connect(mapStateToProps, null)(FavoriteMovies)
