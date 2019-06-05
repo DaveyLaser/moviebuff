@@ -67,14 +67,15 @@ class App extends Component {
       let newState = [...this.state.favoriteMovies];
       newState.push(movie);
       this.setState({favoriteMovies: newState});
-      fetch(ENDPOINT + '/api/movies', {
-        method: 'post',
-        body: JSON.stringify(movie),
-        headers: httpHeader
-      }).then(response => response.json())
-        .then(data => console.log("Added: " + JSON.stringify(data)))
-        .catch(e => console.log(e));
     }
+
+    fetch(ENDPOINT + '/api/movies', {
+      method: 'post',
+      body: JSON.stringify(movie),
+      headers: httpHeader
+    }).then(response => response.json())
+      .then(data => console.log("Added: " + JSON.stringify(data)))
+      .catch(e => console.log(e));
   }
 
   render() {
