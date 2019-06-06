@@ -33,6 +33,7 @@ class MovieGenre extends Component {
     fetch(ENDPOINT + "/api/movie-genres")
       .then(response => response.json())
       .then(genres => this.setState({genres}))
+      .catch(error => console.log('An error occurred!', error))
   }
 
   componentWillReceiveProps(nextProps) {

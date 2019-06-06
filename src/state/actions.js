@@ -44,11 +44,9 @@ export function getMoviesDispatch() {
     dispatch(getMovies())
     const url = ENDPOINT + '/api/movies';
     return fetch(url)
-      .then(
-        response => response.json(),
-        error => console.log('An error occurred!', error)
-      )
-      .then(json => dispatch(getMoviesSuccess(json)));
+      .then(response => response.json())
+      .then(json => dispatch(getMoviesSuccess(json)))
+      .catch(error => console.log('An error occurred!', error))
   }
 }
 
