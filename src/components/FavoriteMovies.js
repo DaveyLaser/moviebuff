@@ -3,18 +3,13 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import MovieInfoRow from './MovieInfoRow'
 import SectionWrapper from './SectionWrapper'
-import DeleteButton from './DeleteButton'
 
 let FavoriteMovies = ({movies}) => {
   let ratedMovieCollection = (movies && movies.length > 0) ?
-  <div className="RatedMovieCollection">
-    {movies.map((movie, idx) => (
-      <MovieInfoRow key={idx} name={movie.name} genre={movie.genre} rating={movie.rating}>
-        <DeleteButton movie={movie}/>
-      </MovieInfoRow>
-    ))}
-  </div>
-  : ''
+    <div className="RatedMovieCollection">
+      {movies.map((movie, idx) => <MovieInfoRow key={idx} movie={movie}/>)}
+    </div>
+    : ''
 
   return (
     <SectionWrapper

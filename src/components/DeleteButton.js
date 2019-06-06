@@ -5,8 +5,7 @@ import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { deleteMovieDispatch } from '../state/actions';
 
-let DeleteButton = ({movie, deleteMovie}) => {
-  console.log(deleteMovie)
+let DeleteButton = ({deleteMovie}) => {
   return (
     <Button onClick={deleteMovie}>
       <DeleteIcon></DeleteIcon>
@@ -15,7 +14,6 @@ let DeleteButton = ({movie, deleteMovie}) => {
 }
 
 DeleteButton.propTypes = {
-  movie: PropTypes.object.isRequired,
   deleteMovie: PropTypes.func.isRequired
 }
 

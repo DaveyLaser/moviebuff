@@ -7,10 +7,6 @@ export const ADD_MOVIE_SUCCESS = 'ADD_MOVIE_SUCCESS'
 export const DELETE_MOVIE = 'DELETE_MOVIE'
 export const DELETE_MOVIE_SUCCESS = 'DELETE_MOVIE_SUCCESS'
 
-const httpHeader = {
-  'Content-Type': 'application/json'
-}
-
 const getMovies = () => ({
   type: GET_MOVIES,
 })
@@ -53,11 +49,9 @@ export function getMoviesDispatch() {
 export function deleteMovieDispatch(movie) {
   return dispatch => {
     dispatch(deleteMovie(movie))
-    const url = ENDPOINT + '/api/movies/' + movie.name;
+    const url = ENDPOINT + `/api/movies/${encodeURIComponent(movie.name)}`;
     return fetch(url, {
       method: 'delete',
-      body: movie.name,
-      headers: httpHeader
     }).then(dispatch(deleteMovieSuccess(movie)))
       .catch(e => console.log(e));
   }
@@ -70,7 +64,6 @@ export function addMovieDispatch(movie) {
     return fetch(url, {
       method: 'post',
       body: JSON.stringify(movie),
-      headers: httpHeader
     }).then(response => response.json())
       .then(json => {
         dispatch(addMovieSuccess(json))

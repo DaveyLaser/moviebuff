@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MovieName from './MovieName'
 import MovieGenre from './MovieGenre'
 import MovieRating from './MovieRating'
+import DeleteButton from './DeleteButton'
 import ENDPOINT from '../common/endpoints'
 
 const movieInfoRowStyle = {
@@ -12,57 +13,54 @@ const movieInfoRowStyle = {
 
 class MovieInfoRow extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      name: this.props.name,
-      genre: this.props.genre,
-      rating: this.props.rating
+      movie: this.props.movie
     }
   }
 
   onNameChange = name => {
-    let oldName = this.state.name;
+    let oldName = this.state.movie.name;
     this.setState({
-      name: name,
+      movie: {...this.state.movie, name: name}
     }, () => this.updateMovie(oldName));
   }
 
   onGenreChange = genre => {
     this.setState({
-      genre: genre,
+      movie: {...this.state.movie, genre: genre}
     }, () => this.updateMovie());
   }
 
   onRatingChange = rating => {
     this.setState({
-      rating: rating,
+      movie: {...this.state.movie, rating: rating}
     }, () => this.updateMovie());
   }
 
   updateMovie = (oldMovieName) => {
     if (!oldMovieName) {
-      oldMovieName = this.state.name;
+      oldMovieName = this.state.movie.name;
     } 
     const url = ENDPOINT + `/api/movies/${encodeURIComponent(oldMovieName)}`;
     fetch(url, {
       method: 'put',
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(this.state.movie),
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-      .then(response => response.json())
-      .then(json => console.log("Updated: " + JSON.stringify(json)))
-      .catch(e => console.log("I was lazy here: " + e));
+    }).then(response => response.json())
+      .then(json => console.log('Updated: ' + JSON.stringify(json)))
+      .catch(e => console.log('An error occurred! ' + e));
   }
 
   render() {
     return (
       <div className="MovieInfoRow" style={movieInfoRowStyle}>
-        <MovieName name={this.state.name} onChange={this.onNameChange} />
-        <MovieGenre genre={this.state.genre} onChange={this.onGenreChange} />
-        <MovieRating rating={this.state.rating} onChange={this.onRatingChange}/>
-        {this.props.children}
+        <MovieName name={this.state.movie.name} onChange={this.onNameChange} />
+        <MovieGenre genre={this.state.movie.genre} onChange={this.onGenreChange} />
+        <MovieRating rating={this.state.movie.rating} onChange={this.onRatingChange}/>
+        <DeleteButton movie={this.state.movie}/>
       </div>
     )
   }

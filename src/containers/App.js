@@ -17,12 +17,12 @@ const appStyle = {
   alignItems: 'center',
 }
 
-let App = ({init, loading, getMovies}) => {
-  if (init) {
+let App = ({movies, getMovies}) => {
+  if (movies === undefined) {
     getMovies()
   }
 
-  let favoriteMovies = loading ? <h2>Loading...</h2> : <FavoriteMovies/>;
+  let favoriteMovies = movies === undefined ? <h2>Loading...</h2> : <FavoriteMovies movies={movies}/>;
   return (
     <div className="App" style={appStyle}>
       <header>
@@ -35,14 +35,12 @@ let App = ({init, loading, getMovies}) => {
 }
 
 App.propTypes = {
-  init: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
+  movies: PropTypes.array,
   getMovies: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  init: state.init,
-  loading: state.loading,
+  movies: state.movies
 })
 
 const mapDispatchToProps = {getMovies: getMoviesDispatch}
