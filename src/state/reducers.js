@@ -7,14 +7,15 @@ import {
   DELETE_MOVIE_SUCCESS
 } from './actions'
 
-const defaultState = {init: true, loading: true, movies: []}
+const defaultState = {movies: undefined, movie: {}}
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case GET_MOVIES:
-      return {...state, init: false, loading: true}
+      return {...state}
     case GET_MOVIES_SUCCESS:
-      return {...state, movies: action.movies, loading: false}
+      return {...state, movies: action.movies}
     case ADD_MOVIE:
+      return state;
     case ADD_MOVIE_SUCCESS:
       return {...state, movie: action.movie}
     case DELETE_MOVIE:
