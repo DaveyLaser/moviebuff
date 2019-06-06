@@ -13,7 +13,6 @@ const movieInfoRowStyle = {
 class MovieInfoRow extends Component {
   constructor(props) {
     super(props);
-    console.log('CTOR: ', this.props)
     this.state = {
       name: this.props.name,
       genre: this.props.genre,
@@ -44,9 +43,7 @@ class MovieInfoRow extends Component {
     if (!oldMovieName) {
       oldMovieName = this.state.name;
     } 
-    console.log('STATE ON UPDATE: ', this.state)
     const url = ENDPOINT + `/api/movies/${encodeURIComponent(oldMovieName)}`;
-    console.log('URL: ', url)
     fetch(url, {
       method: 'put',
       body: JSON.stringify(this.state),

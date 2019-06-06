@@ -9,7 +9,7 @@ let FavoriteMovies = ({movies}) => {
   let ratedMovieCollection = (movies && movies.length > 0) ?
   <div className="RatedMovieCollection">
     {movies.map((movie, idx) => (
-      <MovieInfoRow key={idx} movie={movie}>
+      <MovieInfoRow key={idx} name={movie.name} genre={movie.genre} rating={movie.rating}>
         <DeleteButton movie={movie}/>
       </MovieInfoRow>
     ))}
