@@ -4,22 +4,22 @@ import PropTypes from 'prop-types'
 import MovieInfoRow from './MovieInfoRow'
 import SectionWrapper from './SectionWrapper'
 
-let FavoriteMovies = ({movies}) => {
-  let ratedMovieCollection = (movies && movies.length > 0) ?
+const ratedMovieCollection = (movies) => (
+  (movies && movies.length > 0) ?
     <div className="RatedMovieCollection">
       {movies.map((movie, idx) => <MovieInfoRow key={idx} movie={movie}/>)}
     </div>
     : ''
+)
 
-  return (
+let FavoriteMovies = ({movies}) => (
     <SectionWrapper
       title="My favorite movies:"
       backgroundColor="darkgray"
     >
-      {ratedMovieCollection}
+      {ratedMovieCollection(movies)}
     </SectionWrapper>
-  )
-}
+)
 
 FavoriteMovies.propTypes = {
   movies: PropTypes.array.isRequired
