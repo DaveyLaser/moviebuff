@@ -11,11 +11,9 @@ const footerStyle = {
   color: 'white',
 }
 
-const onAddMovie = () => {};
-
 let Footer = () => (
   <footer style={footerStyle}>
-    <AddMovie onAdd={onAddMovie} />
+    <AddMovie/>
     <Banner />
   </footer>
 )

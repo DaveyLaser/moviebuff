@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FavoriteMovies from '../components/FavoriteMovies'
-import Banner from '../components/Banner'
+import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { getMoviesDispatch } from '../state/actions'
+import { initState } from '../state/actions'
 
 const appStyle = {
   textAlign: 'center',
@@ -17,32 +17,31 @@ const appStyle = {
   alignItems: 'center',
 }
 
-let App = ({movies, getMovies}) => {
-  if (movies === undefined) {
-    getMovies()
+let App = ({isInit, init}) => {
+  if (!isInit) {
+    init()
   }
 
-  let favoriteMovies = movies === undefined ? <h2>Loading...</h2> : <FavoriteMovies movies={movies}/>;
   return (
     <div className="App" style={appStyle}>
-      <header>
-        <Banner/>
-      </header>
-      {favoriteMovies}
-      <Footer/>
+      <Header/>
+      {isInit ? <FavoriteMovies/> : <h2>Loading...</h2> }
+      {isInit ? <Footer/> : <h2>Loading...</h2> }
     </div>
   )
 }
 
 App.propTypes = {
-  movies: PropTypes.array,
-  getMovies: PropTypes.func.isRequired
+  init: PropTypes.func.isRequired,
+  isInit: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies
+  isInit: state.isInit
 })
 
-const mapDispatchToProps = {getMovies: getMoviesDispatch}
+const mapDispatchToProps = {
+  init: initState,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

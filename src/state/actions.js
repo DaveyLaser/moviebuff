@@ -1,19 +1,41 @@
-import ENDPOINT from '../common/endpoints'
+import {fetchMovies, fetchGenres} from '../api/fetch'
 
+export const INIT = 'INIT'
+export const INIT_SUCCESS = 'INIT_SUCCESS'
 export const GET_MOVIES = 'GET_MOVIES'
 export const GET_MOVIES_SUCCESS = 'GET_MOVIES_SUCCESS'
+export const GET_GENRES = 'GET_GENRES'
+export const GET_GENRES_SUCCESS = 'GET_GENRES_SUCCESS'
 export const ADD_MOVIE = 'ADD_MOVIE'
 export const ADD_MOVIE_SUCCESS = 'ADD_MOVIE_SUCCESS'
 export const DELETE_MOVIE = 'DELETE_MOVIE'
 export const DELETE_MOVIE_SUCCESS = 'DELETE_MOVIE_SUCCESS'
 
+const doInit = () => ({
+  type: INIT
+})
+
+const initSuccess = (isInit) => ({
+  type: INIT_SUCCESS,
+  isInit: isInit
+})
+
 const getMovies = () => ({
   type: GET_MOVIES,
 })
 
-const getMoviesSuccess = json => ({
+const getMoviesSuccess = movies => ({
   type: GET_MOVIES_SUCCESS,
-  movies: json
+  movies: movies
+})
+
+const getGenres = () => ({
+  type: GET_GENRES,
+})
+
+const getGenresSuccess = genres => ({
+  type: GET_GENRES_SUCCESS,
+  genres: genres
 })
 
 const addMovie = movie => ({
@@ -35,32 +57,41 @@ const deleteMovieSuccess = movie => ({
   movie: movie
 })
 
-export function getMoviesDispatch() {
+export const initState = () => {
   return dispatch => {
+    dispatch(doInit())
     dispatch(getMovies())
-    const url = ENDPOINT + '/api/movies';
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => dispatch(getMoviesSuccess(json)))
-      .catch(error => console.log('An error occurred!', error))
+    return fetchMovies()
+      .then(movies => {
+        dispatch(getMoviesSuccess(movies))
+        dispatch(getGenres())
+        return fetchGenres()
+          .then(genres => {
+            dispatch(getGenresSuccess(genres))
+            dispatch(initSuccess(true))
+          })
+      })
+      .catch(error => console.log(error))
   }
 }
 
 export function deleteMovieDispatch(movie) {
   return dispatch => {
     dispatch(deleteMovie(movie))
-    const url = ENDPOINT + `/api/movies/${encodeURIComponent(movie.name)}`;
+    // const url = ENDPOINT + `/api/movies/${encodeURIComponent(movie.name)}`;
+    const url = ''
     return fetch(url, {
       method: 'delete',
     }).then(dispatch(deleteMovieSuccess(movie)))
-      .catch(e => console.log(e));
+      .catch(error => console.log(error));
   }
 }
 
 export function addMovieDispatch(movie) {
   return dispatch => {
     dispatch(addMovie(movie))
-    const url = ENDPOINT + '/api/movies';
+    // const url = ENDPOINT + '/api/movies';
+    const url = ''
     return fetch(url, {
       method: 'post',
       body: JSON.stringify(movie),
@@ -70,6 +101,6 @@ export function addMovieDispatch(movie) {
         return json
       })
       .then(json => console.log("Added: " + JSON.stringify(json)))
-      .catch(e => console.log(e));
+      .catch(error => console.log(error));
   }
 }

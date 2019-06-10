@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core'
+import React from 'react'
+import PropTypes from 'prop-types'
+import {makeStyles} from '@material-ui/styles'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import ENDPOINT from '../common/endpoints'
 
-const styles = theme => ({
+const styles = makeStyles({
   movieGenre: {
     display: 'flex',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: 0,
+    marginRight: 0,
     width: "200px",
     textAlign: "left",
   },
@@ -19,65 +19,35 @@ const styles = theme => ({
   }
 })
 
-class MovieGenre extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      genre: this.props.genre,
-      label: "Genre",
-      genres: [],
-    }
-  }
-
-  componentDidMount() {
-    fetch(ENDPOINT + "/api/movie-genres")
-      .then(response => response.json())
-      .then(genres => this.setState({genres}))
-      .catch(error => console.log('An error occurred!', error))
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.genre === "") {
-      this.setState({genre: ""});
-    }
-  }
-
-  onGenreChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-      label: ""
-    })
-    
-    if (this.props.onChange) {
-      this.props.onChange(event.target.value);
-    }
-  }
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.movieGenre}>
-        <TextField
-          select
-          label={this.state.genre ? "" : this.state.label}
-          value={this.state.genre || ""}
-          className={classes.textField}
-          InputProps={{
-            name: "genre",
-            className: classes.input,
-            readOnly: this.props.readOnly,
-          }}
-          onChange={this.onGenreChange}
-        >
+let MovieGenre = ({genre, allGenres, onChange}) => {
+  const classes = styles();
+  return (
+    <div className={classes.movieGenre}>
+      <TextField
+        select
+        value={genre}
+        className={classes.textField}
+        InputProps={{
+          name: "genre",
+          className: classes.input,
+          readOnly: false
+        }}
+        onChange={onChange}
+      >
         {
-          this.state.genres.map(genre => (
+          allGenres ? allGenres.map(genre => (
             <MenuItem key={genre} value={genre}>{genre}</MenuItem>
-          ))
+          )) : ''
         }
-        </TextField>
-      </div>
-    )
-  }
+      </TextField>
+    </div>
+  )
 }
 
-export default withStyles(styles)(MovieGenre)
+MovieGenre.propTypes = {
+  genre: PropTypes.string.isRequired,
+  allGenres: PropTypes.array,
+  onChange: PropTypes.func.isRequired
+}
+
+export default MovieGenre

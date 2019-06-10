@@ -4,29 +4,40 @@ import PropTypes from 'prop-types'
 import MovieInfoRow from './MovieInfoRow'
 import SectionWrapper from './SectionWrapper'
 
-const ratedMovieCollection = (movies) => (
-  (movies && movies.length > 0) ?
+const ratedMovieCollection = (movies, genres) => (
     <div className="RatedMovieCollection">
-      {movies.map((movie, idx) => <MovieInfoRow key={idx} movie={movie}/>)}
+      {Object.keys(movies).map(key =>
+        <MovieInfoRow
+          key={key}
+          movieName={key}
+          movieInfo={movies[key]}
+          allGenres={genres}
+        />
+      )}
     </div>
-    : ''
 )
 
-let FavoriteMovies = ({movies}) => (
-    <SectionWrapper
-      title="My favorite movies:"
-      backgroundColor="darkgray"
-    >
-      {ratedMovieCollection(movies)}
-    </SectionWrapper>
+const FavoriteMovies = ({movies, genres}) => (
+  <SectionWrapper
+    title="My favorite movies:"
+    backgroundColor="darkgray"
+  >
+    {
+      (movies && Object.keys(movies).length > 0) && (genres && genres.length > 0)
+        ? ratedMovieCollection(movies, genres)
+        : ''
+    }
+  </SectionWrapper>
 )
 
 FavoriteMovies.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.object.isRequired,
+  genres: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies
+  movies: state.movies,
+  genres: state.genres
 })
 
 export default connect(mapStateToProps, null)(FavoriteMovies)
