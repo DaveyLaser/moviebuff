@@ -1,4 +1,9 @@
-import {fetchMovies, fetchGenres, fetchUpdate} from '../api/fetch'
+import {
+  fetchMovies,
+  fetchGenres,
+  fetchUpdate,
+  fetchDelete
+} from '../api/fetch'
 
 export const INIT = 'INIT'
 export const INIT_SUCCESS = 'INIT_SUCCESS'
@@ -22,7 +27,7 @@ const initSuccess = (isInit) => ({
   isInit: isInit
 })
 
-const getMovies = () => ({
+const doGetMovies = () => ({
   type: GET_MOVIES,
 })
 
@@ -31,7 +36,7 @@ const getMoviesSuccess = movies => ({
   movies: movies
 })
 
-const getGenres = () => ({
+const doGetGenres = () => ({
   type: GET_GENRES,
 })
 
@@ -49,9 +54,8 @@ const addMovieSuccess = () => ({
   type: ADD_MOVIE_SUCCESS
 })
 
-const deleteMovie = movie => ({
+const doDelete = movie => ({
   type: DELETE_MOVIE,
-  movie: movie
 })
 
 const deleteMovieSuccess = movie => ({
@@ -72,11 +76,11 @@ const updateSuccess = (movieName, movieData) => ({
 export const initState = () => {
   return dispatch => {
     dispatch(doInit())
-    dispatch(getMovies())
+    dispatch(doGetMovies())
     return fetchMovies()
       .then(movies => {
         dispatch(getMoviesSuccess(movies))
-        dispatch(getGenres())
+        dispatch(doGetGenres())
         return fetchGenres()
           .then(genres => {
             dispatch(getGenresSuccess(genres))
@@ -87,15 +91,11 @@ export const initState = () => {
   }
 }
 
-export function deleteMovieDispatch(movie) {
+export function deleteMovie(movie) {
   return dispatch => {
-    dispatch(deleteMovie(movie))
-    // const url = ENDPOINT + `/api/movies/${encodeURIComponent(movie.name)}`;
-    const url = ''
-    return fetch(url, {
-      method: 'delete',
-    }).then(dispatch(deleteMovieSuccess(movie)))
-      .catch(error => console.log(error));
+    dispatch(doDelete())
+    return fetchDelete(movie)
+      .then(dispatch(deleteMovieSuccess(movie)))
   }
 }
 
@@ -118,14 +118,9 @@ export function addMovieDispatch(movie) {
 }
 
 export const updateMovie = (movieName, updatedMovie) => {
-  console.log(movieName, updatedMovie)
   return dispatch => {
     dispatch(doUpdate())
     return fetchUpdate(movieName, updatedMovie)
-      .then(json => {
-        console.log('Updated: ', updatedMovie)
-        return json
-      })
       .then(json => dispatch(updateSuccess(movieName, json)))
   }
 }

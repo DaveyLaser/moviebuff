@@ -25,7 +25,6 @@ export const fetchGenres = () => {
 }
 
 export const fetchUpdate = (movieName, updatedMovieData) => {
-  console.log('FETCH UPDATE: ', movieName, updatedMovieData)
   const url = ENDPOINT + `/api/movies/${encodeURIComponent(movieName)}`
   return fetch(url, {
     method: 'put',
@@ -35,4 +34,12 @@ export const fetchUpdate = (movieName, updatedMovieData) => {
     }
   }).then(response => response.json())
     .catch(e => console.log('An error occurred! ' + e));
+}
+
+export const fetchDelete = movieName => {
+  const url = ENDPOINT + `/api/movies/${encodeURIComponent(movieName)}`;
+  return fetch(url, {
+    method: 'delete',
+  }).then(movieName)
+    .catch(error => console.log(error));
 }

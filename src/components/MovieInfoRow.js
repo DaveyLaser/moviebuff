@@ -17,7 +17,8 @@ class MovieInfoRow extends Component {
       movieName: this.props.movieName,
       movieInfo: this.props.movieInfo,
       allGenres: this.props.allGenres,
-      updateMovie: this.props.updateMovie
+      updateMovie: this.props.updateMovie,
+      deleteMovie: this.props.deleteMovie
     }
   }
 
@@ -60,10 +61,10 @@ class MovieInfoRow extends Component {
   render() {
     return (
       <div className="MovieInfoRow" style={movieInfoRowStyle}>
-        <MovieName name={this.state.movieName} onChange={this.onNameChange} />
-        <MovieGenre genre={this.state.movieInfo.genre} allGenres={this.state.allGenres} onChange={this.onGenreChange} />
+        <MovieName name={this.state.movieName} onChange={this.onNameChange}/>
+        <MovieGenre genre={this.state.movieInfo.genre} allGenres={this.state.allGenres} onChange={this.onGenreChange}/>
         <MovieRating rating={this.state.movieInfo.rating} onChange={this.onRatingChange}/>
-        <DeleteButton movieName={this.state.movieName}/>
+        <DeleteButton movieName={this.state.movieName} deleteMovie={this.state.deleteMovie}/>
       </div>
     )
   }

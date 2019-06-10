@@ -51,11 +51,13 @@ const reducer = (state = defaultState, action) => {
     case ADD_MOVIE_SUCCESS:
       return {...state, movie: action.movie}
     case DELETE_MOVIE:
-      return {...state, movie: action.movie}
+      return state;
     case DELETE_MOVIE_SUCCESS:
+      let movies = {...state.movies};
+      delete movies[action.movie]
       return {
         ...state,
-        movies: state.movies.filter(movie => movie.name !== action.movie.name)
+        movies: movies
       }
     case UPDATE_MOVIE:
       return state;
