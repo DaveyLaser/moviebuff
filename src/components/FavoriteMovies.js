@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import MovieInfoRow from './MovieInfoRow'
 import SectionWrapper from './SectionWrapper'
+import {updateMovie} from '../state/actions'
 
-const ratedMovieCollection = (movies, genres) => (
+const ratedMovieCollection = (movies, genres, updateMovie) => (
     <div className="RatedMovieCollection">
       {Object.keys(movies).map(key =>
         <MovieInfoRow
@@ -12,19 +13,20 @@ const ratedMovieCollection = (movies, genres) => (
           movieName={key}
           movieInfo={movies[key]}
           allGenres={genres}
+          updateMovie={updateMovie}
         />
       )}
     </div>
 )
 
-const FavoriteMovies = ({movies, genres}) => (
+const FavoriteMovies = ({movies, genres, updateMovie}) => (
   <SectionWrapper
     title="My favorite movies:"
     backgroundColor="darkgray"
   >
     {
       (movies && Object.keys(movies).length > 0) && (genres && genres.length > 0)
-        ? ratedMovieCollection(movies, genres)
+        ? ratedMovieCollection(movies, genres, updateMovie)
         : ''
     }
   </SectionWrapper>
@@ -40,4 +42,8 @@ const mapStateToProps = state => ({
   genres: state.genres
 })
 
-export default connect(mapStateToProps, null)(FavoriteMovies)
+const mapDispatchToProps = {
+  updateMovie: updateMovie
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteMovies)

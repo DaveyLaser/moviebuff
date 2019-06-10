@@ -1,9 +1,11 @@
-import {fetchMovies, fetchGenres} from '../api/fetch'
+import {fetchMovies, fetchGenres, fetchUpdate} from '../api/fetch'
 
 export const INIT = 'INIT'
 export const INIT_SUCCESS = 'INIT_SUCCESS'
 export const GET_MOVIES = 'GET_MOVIES'
 export const GET_MOVIES_SUCCESS = 'GET_MOVIES_SUCCESS'
+export const UPDATE_MOVIE = 'UPDATE_MOVIE'
+export const UPDATE_MOVIE_SUCCESS = 'UPDATE_MOVIE_SUCCESS'
 export const GET_GENRES = 'GET_GENRES'
 export const GET_GENRES_SUCCESS = 'GET_GENRES_SUCCESS'
 export const ADD_MOVIE = 'ADD_MOVIE'
@@ -57,6 +59,16 @@ const deleteMovieSuccess = movie => ({
   movie: movie
 })
 
+const doUpdate = () => ({
+  type: UPDATE_MOVIE
+})
+
+const updateSuccess = (movieName, movieData) => ({
+  type: UPDATE_MOVIE_SUCCESS,
+  movieName: movieName,
+  movieData: movieData
+})
+
 export const initState = () => {
   return dispatch => {
     dispatch(doInit())
@@ -102,5 +114,18 @@ export function addMovieDispatch(movie) {
       })
       .then(json => console.log("Added: " + JSON.stringify(json)))
       .catch(error => console.log(error));
+  }
+}
+
+export const updateMovie = (movieName, updatedMovie) => {
+  console.log(movieName, updatedMovie)
+  return dispatch => {
+    dispatch(doUpdate())
+    return fetchUpdate(movieName, updatedMovie)
+      .then(json => {
+        console.log('Updated: ', updatedMovie)
+        return json
+      })
+      .then(json => dispatch(updateSuccess(movieName, json)))
   }
 }

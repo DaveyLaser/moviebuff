@@ -8,7 +8,9 @@ import {
   ADD_MOVIE,
   ADD_MOVIE_SUCCESS,
   DELETE_MOVIE,
-  DELETE_MOVIE_SUCCESS
+  DELETE_MOVIE_SUCCESS,
+  UPDATE_MOVIE,
+  UPDATE_MOVIE_SUCCESS
 } from './actions'
 
 const defaultState = {
@@ -31,7 +33,7 @@ const reducer = (state = defaultState, action) => {
         isInit: action.isInit
       }
     case GET_MOVIES:
-      return {...state}
+      return state
     case GET_MOVIES_SUCCESS:
       return {
         ...state,
@@ -54,6 +56,33 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         movies: state.movies.filter(movie => movie.name !== action.movie.name)
+      }
+    case UPDATE_MOVIE:
+      return state;
+    case UPDATE_MOVIE_SUCCESS:
+      if (state.movies[action.movieData.name] === undefined) {
+        // name was updated, replaced existing entry
+        let movies = {...state.movies}
+        delete Object.assign(
+          movies,
+          {[action.movieData.name]: state.movies[action.movieName]}
+        )[action.movieName]
+        return {
+          ...state,
+          movies: movies
+        }
+      } else {
+        // name wasn't updated, no need to replace old entry
+        return {
+          ...state,
+          movies: {
+            ...state.movies,
+            [action.movieName]: {
+              genre: action.movieData.genre,
+              rating: action.movieData.rating
+            }
+          }
+        }
       }
     default:
       return state

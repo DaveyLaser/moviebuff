@@ -30,7 +30,7 @@ class MovieRating extends Component {
         starSpacing="2px"
         starHoverColor="#aa0000"
         changeRating={this.onStarClick}
-        numberOfStars={5}
+        numberOfStars={this.state.starCount}
         name='rating'
       />
     )

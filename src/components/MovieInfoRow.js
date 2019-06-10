@@ -16,7 +16,8 @@ class MovieInfoRow extends Component {
     this.state = {
       movieName: this.props.movieName,
       movieInfo: this.props.movieInfo,
-      allGenres: this.props.allGenres
+      allGenres: this.props.allGenres,
+      updateMovie: this.props.updateMovie
     }
   }
 
@@ -24,35 +25,36 @@ class MovieInfoRow extends Component {
     let oldName = this.state.movieName;
     this.setState({
       movieName: name,
-    }, () => this.updateMovie(oldName));
+    }, () => this.state.updateMovie(
+      oldName, {
+        name: name,
+        genre: this.state.movieInfo.genre,
+        rating: this.state.movieInfo.rating
+      }));
   }
 
   onGenreChange = genre => {
     this.setState({
       movieInfo: {...this.state.movieInfo, genre: genre}
-    }, () => this.updateMovie());
+    }, () => this.state.updateMovie(
+      this.state.movieName, {
+        name: this.state.movieName,
+        genre: genre,
+        rating: this.state.movieInfo.rating
+      }
+    ));
   }
 
   onRatingChange = rating => {
     this.setState({
       movieInfo: {...this.state.movieInfo, rating: rating}
-    }, () => this.updateMovie());
-  }
-
-  updateMovie = (oldMovieName) => {
-    if (!oldMovieName) {
-      oldMovieName = this.state.movieName;
-    } 
-    // const url = ENDPOINT + `/api/movies/${encodeURIComponent(oldMovieName)}`;
-    // fetch(url, {
-    //   method: 'put',
-    //   body: JSON.stringify(this.state.movieInfo),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // }).then(response => response.json())
-    //   .then(json => console.log('Updated: ' + JSON.stringify(json)))
-    //   .catch(e => console.log('An error occurred! ' + e));
+    }, () => this.state.updateMovie(
+      this.state.movieName, {
+        name: this.state.movieName,
+        genre: this.state.movieInfo.genre,
+        rating: rating
+      }
+    ));
   }
 
   render() {
