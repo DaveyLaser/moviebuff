@@ -34,8 +34,8 @@ class MovieGenre extends Component {
       label: ""
     });
 
-    if (this.props.onChange) {
-      this.props.onChange(event.target.value);
+    if (this.state.onChange) {
+      this.state.onChange(event.target.value);
     }
   }
 

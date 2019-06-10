@@ -7,7 +7,7 @@ const store = configureStore()
 
 const Root = () => (
   <Provider store={store}>
-    <App />
+    <App/>
   </Provider>
 )
 

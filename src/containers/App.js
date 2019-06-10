@@ -26,7 +26,7 @@ let App = ({isInit, init}) => {
     <div className="App" style={appStyle}>
       <Header/>
       {isInit ? <FavoriteMovies/> : <h2>Loading...</h2> }
-      {isInit ? <Footer/> : <h2>Loading...</h2> }
+      <Footer/>
     </div>
   )
 }

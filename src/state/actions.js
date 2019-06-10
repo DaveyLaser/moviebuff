@@ -3,7 +3,7 @@ import {
   fetchGetGenres,
   fetchUpdateMovie,
   fetchDeleteMovie,
-  fetchCreateMovie as fetchCreate,
+  fetchCreateMovie,
 } from '../api/fetch'
 
 export const INIT = 'INIT'
@@ -12,6 +12,7 @@ export const GET_MOVIES = 'GET_MOVIES'
 export const GET_MOVIES_SUCCESS = 'GET_MOVIES_SUCCESS'
 export const UPDATE_MOVIE = 'UPDATE_MOVIE'
 export const UPDATE_MOVIE_SUCCESS = 'UPDATE_MOVIE_SUCCESS'
+export const UPDATE_ADD_MOVIE = 'UPDATE_ADD_MOVIE'
 export const GET_GENRES = 'GET_GENRES'
 export const GET_GENRES_SUCCESS = 'GET_GENRES_SUCCESS'
 export const ADD_MOVIE = 'ADD_MOVIE'
@@ -64,6 +65,11 @@ const deleteMovieSuccess = movie => ({
   movie: movie
 })
 
+const doUpdateCreateMovie = (movie) => ({
+  type: UPDATE_ADD_MOVIE,
+  movie: movie
+})
+
 const doUpdate = () => ({
   type: UPDATE_MOVIE
 })
@@ -92,7 +98,7 @@ export const initState = () => {
   }
 }
 
-export function deleteMovie(movie) {
+export const deleteMovie = (movie) => {
   return dispatch => {
     dispatch(doDeleteMovie())
     return fetchDeleteMovie(movie)
@@ -100,12 +106,17 @@ export function deleteMovie(movie) {
   }
 }
 
-export function createMovie(movie) {
-  console.log('ADD MOVIE: ', movie)
+export const createMovie = (movie) => {
   return dispatch => {
     dispatch(doCreateMovie(movie))
-    return fetchCreate(movie)
-      .then(json => dispatch(createMovieSuccess(movie)))
+    return fetchCreateMovie(movie)
+      .then(json => dispatch(createMovieSuccess(json)))
+  }
+}
+
+export const updateCreateMovie = (movie) => {
+  return dispatch => {
+    dispatch(doUpdateCreateMovie(movie))
   }
 }
 

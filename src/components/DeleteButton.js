@@ -15,6 +15,7 @@ class DeleteButton extends Component {
   onClick = () => {
     this.state.deleteMovie(this.state.movieName)
   }
+
   render() {
     return (
       <Button onClick={this.onClick}>
@@ -24,27 +25,9 @@ class DeleteButton extends Component {
   }
 }
 
-// let DeleteButton = ({deleteMovie}) => (
-//   <Button onClick={deleteMovie}>
-//     <DeleteIcon></DeleteIcon>
-//   </Button>
-// )
-
 DeleteButton.propTypes = {
   movieName: PropTypes.string.isRequired,
   deleteMovie: PropTypes.func.isRequired
 }
-
-// const mapStateToProps = state => ({
-//   movie: state.movie,
-// })
-
-// const mapDispatchToProps = (dispatch, props) => ({
-//   deleteMovie: () => {
-//     dispatch(deleteMovieDispatch(props.movie))
-//   }
-// })
-
-// DeleteButton = connect(mapStateToProps, mapDispatchToProps)(DeleteButton)
 
 export default DeleteButton

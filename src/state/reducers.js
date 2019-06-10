@@ -9,6 +9,7 @@ import {
   ADD_MOVIE_SUCCESS,
   DELETE_MOVIE,
   DELETE_MOVIE_SUCCESS,
+  UPDATE_ADD_MOVIE,
   UPDATE_MOVIE,
   UPDATE_MOVIE_SUCCESS
 } from './actions'
@@ -67,6 +68,11 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         movies: movies
+      }
+    case UPDATE_ADD_MOVIE:
+      return {
+        ...state,
+        movieToAdd: action.movie
       }
     case UPDATE_MOVIE:
       return state;

@@ -1,11 +1,9 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AddButton from './AddButton'
 import MovieName from './MovieName'
 import MovieGenre from './MovieGenre'
 import MovieRating from './MovieRating'
-import {createMovie} from '../state/actions'
 
 const addMovieStyle = {
   display: 'flex',
@@ -40,56 +38,68 @@ const defaultMovie = {
   rating: 0
 }
 
-let AddMovie = ({movie, allGenres, addMovie}) => {
-  if (movie === undefined) {
-    movie = {...defaultMovie};
+class AddMovie extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      movie: defaultMovie,
+      allGenres: this.props.allGenres,
+      createMovie: this.props.createMovie,
+      updateCreateMovie: this.props.updateCreateMovie
+    }
   }
 
-  if (allGenres === undefined) {
-    allGenres = []
+  onChange = movie => {
+    this.setState({
+      movie: movie
+    })
+
+    if (this.state.updateCreateMovie) {
+      this.state.updateCreateMovie(this.state.movie)
+    }
   }
 
-  return(
-    <div className="AddMovie" style={addMovieStyle}>
-      <div/>
-      <div style={centerStyle}>
-        <div style={headerStyle}>
-          <p>Add a favorite:</p>
+  render() {
+    return (
+      <div className="AddMovie" style={addMovieStyle}>
+        <div/>
+        <div style={centerStyle}>
+          <div style={headerStyle}>
+            <p>Add a favorite:</p>
+          </div>
+          {
+            this.state.movie && this.state.allGenres
+              ?
+                <div style={rowStyle}>
+                  <MovieName
+                    name={this.state.movie.name}
+                    onChange={this.onChange}
+                  />
+                  <MovieGenre
+                    genre={this.state.movie.genre}
+                    allGenres={this.state.allGenres}
+                    onChange={this.onChange}
+                  />
+                  <MovieRating
+                    rating={this.state.movie.rating}
+                    onChange={this.onChange}
+                  />
+                  <AddButton onAdd={this.state.addMovie}/>
+                </div>
+              :
+                ''
+          }
         </div>
-        <div style={rowStyle}>
-          <MovieName
-            name={movie.name}
-            onChange={() => {}}
-          />
-          <MovieGenre
-            genre={movie.genre}
-            onChange={() => {}}
-            allGenres={allGenres}
-          />
-          <MovieRating
-            rating={movie.rating}
-            onChange={() => {}}
-          />
-          <AddButton onAdd={addMovie}/>
-        </div>
+        <div/>
       </div>
-      <div/>
-    </div>
-  )
+    )
+  }
 }
 
 AddMovie.propTypes = {
-  movie: PropTypes.object,
-  allGenres: PropTypes.array
+  allGenres: PropTypes.array,
+  addMovie: PropTypes.func,
+  updateAddMovie: PropTypes.func
 }
 
-const mapStateToProps = state => ({
-  movie: state.movie,
-  allGenres: state.genres
-})
-
-const mapDispatchToProps = {
-  addMovie: createMovie
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddMovie)
+export default AddMovie
