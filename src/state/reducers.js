@@ -24,6 +24,7 @@ const defaultState = {
   isInit: false
 }
 const reducer = (state = defaultState, action) => {
+  let movies = undefined
   switch (action.type) {
     case INIT:
       return state;
@@ -49,11 +50,19 @@ const reducer = (state = defaultState, action) => {
     case ADD_MOVIE:
       return state;
     case ADD_MOVIE_SUCCESS:
-      return {...state, movie: action.movie}
+      movies = {...state.movies}
+      movies[state.movieToAdd.name] = {
+        genre: state.movieToAdd.genre,
+        rating: state.movieToAdd.rating
+      }
+      return {
+        ...state,
+        movies: movies
+      }
     case DELETE_MOVIE:
       return state;
     case DELETE_MOVIE_SUCCESS:
-      let movies = {...state.movies};
+      movies = {...state.movies};
       delete movies[action.movie]
       return {
         ...state,
@@ -64,7 +73,7 @@ const reducer = (state = defaultState, action) => {
     case UPDATE_MOVIE_SUCCESS:
       if (state.movies[action.movieData.name] === undefined) {
         // name was updated, replaced existing entry
-        let movies = {...state.movies}
+        movies = {...state.movies}
         delete Object.assign(
           movies,
           {[action.movieData.name]: state.movies[action.movieName]}

@@ -1,8 +1,9 @@
 import {
-  fetchMovies,
-  fetchGenres,
-  fetchUpdate,
-  fetchDelete
+  fetchGetMovies,
+  fetchGetGenres,
+  fetchUpdateMovie,
+  fetchDeleteMovie,
+  fetchCreateMovie as fetchCreate,
 } from '../api/fetch'
 
 export const INIT = 'INIT'
@@ -45,16 +46,16 @@ const getGenresSuccess = genres => ({
   genres: genres
 })
 
-const addMovie = movie => ({
+const doCreateMovie = () => ({
   type: ADD_MOVIE,
+})
+
+const createMovieSuccess = (movie) => ({
+  type: ADD_MOVIE_SUCCESS,
   movie: movie
 })
 
-const addMovieSuccess = () => ({
-  type: ADD_MOVIE_SUCCESS
-})
-
-const doDelete = movie => ({
+const doDeleteMovie = movie => ({
   type: DELETE_MOVIE,
 })
 
@@ -77,11 +78,11 @@ export const initState = () => {
   return dispatch => {
     dispatch(doInit())
     dispatch(doGetMovies())
-    return fetchMovies()
+    return fetchGetMovies()
       .then(movies => {
         dispatch(getMoviesSuccess(movies))
         dispatch(doGetGenres())
-        return fetchGenres()
+        return fetchGetGenres()
           .then(genres => {
             dispatch(getGenresSuccess(genres))
             dispatch(initSuccess(true))
@@ -93,34 +94,25 @@ export const initState = () => {
 
 export function deleteMovie(movie) {
   return dispatch => {
-    dispatch(doDelete())
-    return fetchDelete(movie)
+    dispatch(doDeleteMovie())
+    return fetchDeleteMovie(movie)
       .then(dispatch(deleteMovieSuccess(movie)))
   }
 }
 
-export function addMovieDispatch(movie) {
+export function createMovie(movie) {
+  console.log('ADD MOVIE: ', movie)
   return dispatch => {
-    dispatch(addMovie(movie))
-    // const url = ENDPOINT + '/api/movies';
-    const url = ''
-    return fetch(url, {
-      method: 'post',
-      body: JSON.stringify(movie),
-    }).then(response => response.json())
-      .then(json => {
-        dispatch(addMovieSuccess(json))
-        return json
-      })
-      .then(json => console.log("Added: " + JSON.stringify(json)))
-      .catch(error => console.log(error));
+    dispatch(doCreateMovie(movie))
+    return fetchCreate(movie)
+      .then(json => dispatch(createMovieSuccess(movie)))
   }
 }
 
 export const updateMovie = (movieName, updatedMovie) => {
   return dispatch => {
     dispatch(doUpdate())
-    return fetchUpdate(movieName, updatedMovie)
+    return fetchUpdateMovie(movieName, updatedMovie)
       .then(json => dispatch(updateSuccess(movieName, json)))
   }
 }

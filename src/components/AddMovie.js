@@ -5,6 +5,7 @@ import AddButton from './AddButton'
 import MovieName from './MovieName'
 import MovieGenre from './MovieGenre'
 import MovieRating from './MovieRating'
+import {createMovie} from '../state/actions'
 
 const addMovieStyle = {
   display: 'flex',
@@ -39,7 +40,7 @@ const defaultMovie = {
   rating: 0
 }
 
-let AddMovie = ({movie, allGenres}) => {
+let AddMovie = ({movie, allGenres, addMovie}) => {
   if (movie === undefined) {
     movie = {...defaultMovie};
   }
@@ -69,7 +70,7 @@ let AddMovie = ({movie, allGenres}) => {
             rating={movie.rating}
             onChange={() => {}}
           />
-          <AddButton onAdd={() => {}}/>
+          <AddButton onAdd={addMovie}/>
         </div>
       </div>
       <div/>
@@ -87,4 +88,8 @@ const mapStateToProps = state => ({
   allGenres: state.genres
 })
 
-export default connect(mapStateToProps, null)(AddMovie)
+const mapDispatchToProps = {
+  addMovie: createMovie
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMovie)

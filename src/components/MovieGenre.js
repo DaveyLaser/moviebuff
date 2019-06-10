@@ -45,6 +45,7 @@ class MovieGenre extends Component {
       <div className={classes.movieGenre}>
         <TextField
           select
+          label={this.state.genre ? '' : this.state.label}
           value={this.state.genre}
           className={classes.textField}
           InputProps={{
